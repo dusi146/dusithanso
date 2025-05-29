@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="pageTitle">🔮 Số Phong Thủy 🔮</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Charm:wght@400;700&family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Merienda:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div id="intro-overlay" class="intro-overlay">
+        <h2 class="intro-text">DUSI THẦN SỐ</h2>
+    </div>
+
+    <div class="background-overlay"></div>
+    <div class="main-content">
+        <div class="controls-top-right">
+            <button id="lang-toggle" class="control-button">
+                <span class="lang-text" data-lang-key="langToggle">ENG</span>
+            </button>
+            <button id="theme-toggle" class="control-button">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+
+        <div class="container">
+            <h1 data-lang-key="mainTitle">🔮 Số Phong Thủy 🔮</h1>
+            <p class="slogan" data-lang-key="slogan">Khám phá bí ẩn đằng sau dãy số của bạn</p>
+
+            <div class="input-section">
+                <input type="text" id="fullNameInput" placeholder="Họ và tên của bạn" data-lang-key="placeholderFullName">
+                <input type="date" id="dobInput">
+                <input type="text" id="phoneNumberInput" placeholder="Nhập số điện thoại (10 chữ số)" data-lang-key="placeholderPhoneNumber">
+                <div class="button-group">
+                    <button id="checkButton">
+                        <span class="button-text" data-lang-key="buttonPredict">Tiên Tri Ngay!</span>
+                        <span class="sparkle">✨</span>
+                    </button>
+                    <button id="findGoodNumberButton" disabled>
+                        <span class="button-text" data-lang-key="buttonFindGood">Số Hợp Mệnh</span>
+                        <span class="sparkle">✨</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading-overlay">
+                <div class="spinner"></div>
+                <div class="checkmark-wrapper">
+                    <i class="fas fa-check checkmark-icon"></i>
+                </div>
+            </div>
+
+            <div id="result" class="result-box">
+                <p class="initial-message" data-lang-key="initialMessage">Nhập thông tin của mày vào ô trên để bắt đầu khám phá vận mệnh!</p>
+            </div>
+
+            <div class="disclaimer">
+                <p data-lang-key="disclaimer">Lưu ý: Đây chỉ là công cụ giải trí dựa trên các quan niệm phong thủy và dân gian. Không nên quá tin tưởng!</p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>By Phạm Duy Thái</p>
+        </footer>
+    </div>
+
+    <div id="carrierModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 data-lang-key="chooseCarrier">Chọn Nhà Mạng</h3>
+            <div class="carrier-options">
+                <label>
+                    <input type="radio" name="carrier" value="Viettel"> Viettel
+                </label>
+                <label>
+                    <input type="radio" name="carrier" value="Mobifone"> Mobifone
+                </label>
+                <label>
+                    <input type="radio" name="carrier" value="Vinaphone"> Vinaphone
+                </label>
+                <label>
+                    <input type="radio" name="carrier" value="Vietnamobile"> Vietnamobile
+                </label>
+                <label>
+                    <input type="radio" name="carrier" value="Gmobile"> Gmobile
+                </label>
+            </div>
+            <button id="searchGoodNumberButton" data-lang-key="buttonSearch">Dò Số</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

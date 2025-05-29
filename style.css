@@ -1,0 +1,737 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Charm:wght@400;700&family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Merienda:wght@400;700&display=swap');
+
+/* Default (Dark) Theme */
+:root {
+    --bg-gradient-start: #0f0a1e;
+    --bg-gradient-end: #2a0b3e;
+    --bg-gradient-mid: #0e051a;
+    --text-color: #e0e0e0;
+    --heading-color: #e0b0ff;
+    --heading-shadow-color: rgba(224, 176, 255, 0.8);
+    --slogan-color: #c0c0c0;
+    --container-bg: rgba(0, 0, 0, 0.6);
+    --container-shadow: rgba(173, 216, 230, 0.3);
+    --container-border: rgba(173, 216, 230, 0.2);
+    --input-border: #a052be;
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-placeholder: #ccc;
+    --input-focus-border: #e0b0ff;
+    --input-focus-shadow: rgba(224, 176, 255, 0.6);
+    --button-bg-start: #8a2be2;
+    --button-bg-end: #a052be;
+    --button-shadow: rgba(138, 43, 226, 0.4);
+    --result-box-border: rgba(173, 216, 230, 0.15);
+    --result-box-bg: rgba(255, 255, 255, 0.08);
+    --result-text-color: #f0f0f0;
+    --initial-msg-color: #bbb;
+    --disclaimer-color: #999;
+    --footer-color: #808080;
+    --spinner-color: #e0b0ff;
+    --checkmark-bg: #8aff8a;
+    --checkmark-icon-color: #0e051a;
+    --loading-overlay-bg: rgba(0, 0, 0, 0.8);
+
+    /* Specific fonts for Vietnamese compatibility */
+    --main-font: 'Merienda', cursive; /* or 'Dancing Script', 'Charm' for more artistic */
+    --heading-font: 'Cinzel Decorative', serif;
+
+    /* Modal colors */
+    --modal-bg: rgba(0, 0, 0, 0.85);
+    --modal-content-bg: #1a082c;
+    --modal-border: #8a2be2;
+    --modal-text-color: #e0e0e0;
+    --radio-checked-bg: #8a2be2;
+    --radio-checked-border: #e0b0ff;
+    --radio-label-hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Light Theme */
+body.light-theme {
+    --bg-gradient-start: #e0f2f7; /* Light blue */
+    --bg-gradient-end: #c8e6f1; /* Lighter blue */
+    --bg-gradient-mid: #b3e0ed; /* Even lighter */
+    --text-color: #333;
+    --heading-color: #362f4f; /* Darker purple */
+    --heading-shadow-color: rgba(54, 47, 79, 0.3);
+    --slogan-color: #555;
+    --container-bg: rgba(255, 255, 255, 0.8);
+    --container-shadow: rgba(0, 0, 0, 0.1);
+    --container-border: rgba(0, 0, 0, 0.1);
+    --input-border: #6a5acd; /* Slate Blue */
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-placeholder: #666;
+    --input-focus-border: #483d8b; /* Dark Slate Blue */
+    --input-focus-shadow: rgba(72, 61, 139, 0.3);
+    --button-bg-start: #4682b4; /* Steel Blue */
+    --button-bg-end: #5f9ea0; /* Cadet Blue */
+    --button-shadow: rgba(70, 130, 180, 0.4);
+    --result-box-border: rgba(0, 0, 0, 0.1);
+    --result-box-bg: rgba(240, 240, 240, 0.9);
+    --result-text-color: #333;
+    --initial-msg-color: #888;
+    --disclaimer-color: #777;
+    --footer-color: #666;
+    --spinner-color: #4682b4;
+    --checkmark-bg: #4caf50; /* Green for light theme */
+    --checkmark-icon-color: #fff;
+    --loading-overlay-bg: rgba(255, 255, 255, 0.9);
+
+    /* Modal colors - Light theme */
+    --modal-bg: rgba(255, 255, 255, 0.85);
+    --modal-content-bg: #f0f8ff;
+    --modal-border: #4682b4;
+    --modal-text-color: #333;
+    --radio-checked-bg: #4682b4;
+    --radio-checked-border: #5f9ea0;
+    --radio-label-hover-bg: rgba(0, 0, 0, 0.05);
+}
+
+
+body {
+    margin: 0;
+    font-family: var(--main-font);
+    color: var(--text-color);
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end), var(--bg-gradient-mid));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 0;
+    box-sizing: border-box;
+    position: relative;
+    overflow-y: auto;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" opacity="0.1"><rect x="0" y="0" width="100" height="100" fill="url(%23g)"/><defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%236a0572"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs></svg>') no-repeat center center;
+    background-size: cover;
+    opacity: 0.2;
+    z-index: 0;
+    animation: pulseBg 20s infinite alternate;
+}
+
+@keyframes pulseBg {
+    0% { transform: scale(1); opacity: 0.15; }
+    100% { transform: scale(1.1); opacity: 0.25; }
+}
+
+.main-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    opacity: 0; /* Hidden by default */
+    transform: translateY(20px);
+    transition: opacity 1s ease-out 1.5s, transform 1s ease-out 1.5s; /* Delay appearance after intro */
+}
+
+.main-content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.container {
+    background: var(--container-bg);
+    backdrop-filter: blur(8px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 50px var(--container-shadow), 0 0 20px var(--container-border) inset;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInScale 1s ease-out;
+    border: 1px solid var(--container-border);
+    margin-top: 50px;
+    margin-bottom: 30px;
+    transition: background 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+    font-family: var(--heading-font);
+    font-size: 2.8em;
+    color: var(--heading-color);
+    text-shadow: 0 0 15px var(--heading-shadow-color);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.slogan {
+    font-size: 1.1em;
+    font-style: italic;
+    margin-bottom: 30px;
+    color: var(--slogan-color);
+    transition: color 0.5s ease;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+#phoneNumberInput, #fullNameInput, #dobInput {
+    width: calc(100% - 40px);
+    padding: 15px 20px;
+    border: 2px solid var(--input-border);
+    border-radius: 10px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-family: var(--main-font); /* Ensure proper font */
+    font-size: 1.2em;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(160, 82, 190, 0.3);
+}
+
+#dobInput {
+    color: var(--text-color);
+    color-scheme: dark; /* For consistent date input appearance */
+}
+/* Adjustments for input date placeholder and icon */
+#dobInput::-webkit-datetime-edit-text { color: var(--input-placeholder); }
+#dobInput::-webkit-datetime-edit-month-field { color: var(--text-color); }
+#dobInput::-webkit-datetime-edit-day-field { color: var(--text-color); }
+#dobInput::-webkit-datetime-edit-year-field { color: var(--text-color); }
+#dobInput::-webkit-calendar-picker-indicator { filter: invert(1); } /* Invert icon color for dark theme */
+
+body.light-theme #dobInput::-webkit-calendar-picker-indicator {
+    filter: invert(0); /* Normal icon color for light theme */
+}
+
+
+#phoneNumberInput::placeholder, #fullNameInput::placeholder {
+    color: var(--input-placeholder);
+    opacity: 0.7;
+}
+
+#phoneNumberInput:focus, #fullNameInput:focus, #dobInput:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 15px var(--input-focus-shadow);
+    background-color: var(--input-bg);
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center;
+    width: 100%;
+}
+
+#checkButton, #findGoodNumberButton, #searchGoodNumberButton {
+    background: linear-gradient(45deg, var(--button-bg-start), var(--button-bg-end));
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2em; /* Smaller font size for two buttons */
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px var(--button-shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    flex-grow: 1; /* Make buttons grow to fill space */
+    max-width: 250px; /* Limit max width */
+}
+
+#checkButton:hover, #findGoodNumberButton:hover, #searchGoodNumberButton:hover {
+    background: linear-gradient(45deg, var(--button-bg-end), var(--button-bg-start));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--button-shadow);
+}
+
+#checkButton:active, #findGoodNumberButton:active, #searchGoodNumberButton:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 15px var(--button-shadow);
+}
+
+#findGoodNumberButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(50%);
+    box-shadow: none;
+}
+
+#findGoodNumberButton:disabled:hover {
+    transform: translateY(0);
+    box-shadow: none;
+    background: linear-gradient(45deg, var(--button-bg-start), var(--button-bg-end)); /* Keep original background on hover when disabled */
+}
+
+
+.sparkle {
+    position: absolute;
+    font-size: 2em;
+    opacity: 0;
+    pointer-events: none;
+    animation: sparkleEffect 1s forwards;
+    color: #ffe082;
+}
+
+@keyframes sparkleEffect {
+    0% { opacity: 1; transform: scale(0.5); }
+    100% { opacity: 0; transform: scale(2); }
+}
+
+/* --- Loading Animation --- */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--loading-overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    border-radius: 20px;
+}
+
+.loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.spinner {
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top: 6px solid var(--spinner-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1.5s linear infinite;
+    margin-bottom: 20px;
+    transition: border-top-color 0.5s ease;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.checkmark-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--checkmark-bg);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out, background-color 0.5s ease;
+}
+
+.checkmark-wrapper.show {
+    animation: bounceIn 0.5s forwards;
+    opacity: 1;
+}
+
+.checkmark-icon {
+    color: var(--checkmark-icon-color);
+    font-size: 3em;
+    transform: scale(0);
+    animation: checkmarkScale 0.3s forwards 0.2s;
+    transition: color 0.5s ease;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes checkmarkScale {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+.loading-overlay.show .spinner {
+    display: none;
+}
+
+/* --- Kết quả --- */
+.result-box {
+    margin-top: 30px;
+    padding: 25px;
+    border: 1px solid var(--result-box-border);
+    border-radius: 15px;
+    background-color: var(--result-box-bg);
+    min-height: 150px;
+    text-align: left;
+    color: var(--result-text-color);
+    line-height: 1.8;
+    font-size: 1.1em;
+    box-shadow: 0 0 20px rgba(173, 216, 230, 0.1);
+    transition: all 0.5s ease-out;
+}
+
+.initial-message {
+    font-style: italic;
+    color: var(--initial-msg-color);
+    text-align: center;
+}
+
+.result-box h3 {
+    font-family: var(--heading-font);
+    color: var(--heading-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    text-shadow: 0 0 10px var(--heading-shadow-color);
+}
+
+.result-box h4 {
+    font-family: var(--heading-font);
+    color: var(--heading-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.result-box p {
+    margin-bottom: 10px;
+}
+
+.good-number {
+    color: #8aff8a;
+    font-weight: bold;
+}
+
+.bad-number {
+    color: #ff8a8a;
+    font-weight: bold;
+}
+
+.neutral-number {
+    color: #ffcc80;
+    font-weight: bold;
+}
+
+.disclaimer {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: var(--disclaimer-color);
+    font-style: italic;
+    transition: color 0.5s ease;
+}
+
+/* --- Footer --- */
+.footer {
+    margin-top: auto;
+    padding: 20px;
+    color: var(--footer-color);
+    font-size: 0.9em;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: color 0.5s ease;
+}
+
+/* --- Controls Top Right --- */
+.controls-top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+}
+
+.control-button {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.control-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.control-button i {
+    font-size: 1.2em;
+}
+
+body.light-theme .control-button {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+body.light-theme .control-button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Intro Overlay --- */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0515, #1d072c, #0a0410);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
+}
+
+.intro-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-text {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 5em;
+    color: #e0b0ff;
+    text-shadow: 0 0 30px rgba(224, 176, 255, 0.8), 0 0 60px rgba(224, 176, 255, 0.6);
+    opacity: 0;
+    animation: textFadeIn 2s forwards, glowPulse 3s infinite alternate 2s;
+    animation-delay: 0.5s;
+}
+
+@keyframes textFadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 30px rgba(224, 176, 255, 0.8), 0 0 60px rgba(224, 176, 255, 0.6); }
+    100% { text-shadow: 0 0 40px rgba(224, 176, 255, 1), 0 0 80px rgba(224, 176, 255, 0.8); }
+}
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default - FIX */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--modal-bg);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--modal-content-bg);
+    margin: auto;
+    padding: 30px;
+    border: 2px solid var(--modal-border);
+    border-radius: 20px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 40px rgba(138, 43, 226, 0.5);
+    animation: fadeInModal 0.3s ease-out;
+    color: var(--modal-text-color);
+    transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, color 0.5s ease;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-button {
+    color: var(--modal-text-color);
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--heading-color);
+    text-decoration: none;
+}
+
+.modal-content h3 {
+    font-family: var(--heading-font);
+    color: var(--heading-color);
+    font-size: 2em;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(224, 176, 255, 0.5);
+}
+
+.carrier-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.carrier-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.carrier-options label:hover {
+    background-color: var(--radio-label-hover-bg);
+}
+
+.carrier-options input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--modal-text-color);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: border-color 0.3s ease;
+}
+
+.carrier-options input[type="radio"]:checked {
+    border-color: var(--radio-checked-border);
+    background-color: var(--radio-checked-bg);
+}
+
+.carrier-options input[type="radio"]:checked::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+body.light-theme .carrier-options input[type="radio"] {
+    border-color: #666;
+}
+body.light-theme .carrier-options input[type="radio"]:checked::before {
+    background: #333;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        border-radius: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .slogan {
+        font-size: 0.95em;
+    }
+
+    #phoneNumberInput, #fullNameInput, #dobInput {
+        font-size: 1.1em;
+        padding: 12px 20px;
+    }
+
+    .button-group {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        gap: 10px;
+    }
+
+    #checkButton, #findGoodNumberButton, #searchGoodNumberButton {
+        font-size: 1.1em;
+        padding: 12px 25px;
+        max-width: none; /* Remove max-width for stacking */
+        width: 100%;
+    }
+
+    .result-box {
+        padding: 20px;
+        font-size: 1em;
+    }
+
+    .intro-text {
+        font-size: 2.5em;
+    }
+
+    .controls-top-right {
+        top: 10px;
+        right: 10px;
+        gap: 5px;
+    }
+    .control-button {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+    .control-button i {
+        font-size: 1em;
+    }
+
+    .modal-content {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .modal-content h3 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+
+    .carrier-options label {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+}
