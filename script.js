@@ -143,14 +143,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const year = dob.getFullYear();
         if (year < 1900 || year > 2050) return { zodiac: 'N/A', destiny: 'N/A', element: 'N/A' };
 
+        // Corrected zodiacAnimals array order and calculation
         const zodiacAnimals = {
+            // Index 0: Thân (Monkey) - 1908, 1920, 1932, ...
+            // Index 1: Dậu (Rooster)
+            // Index 2: Tuất (Dog)
+            // Index 3: Hợi (Pig)
+            // Index 4: Tý (Rat) - 1900, 1912, 1924, ...
+            // Index 5: Sửu (Ox)
+            // Index 6: Dần (Tiger)
+            // Index 7: Mão (Rabbit)
+            // Index 8: Thìn (Dragon)
+            // Index 9: Tỵ (Snake)
+            // Index 10: Ngọ (Horse)
+            // Index 11: Mùi (Goat)
             vi: ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"],
             en: ["Monkey", "Rooster", "Dog", "Pig", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat"]
         };
-        const elements = {
-            vi: ["Kim", "Mộc", "Thủy", "Hỏa", "Thổ"],
-            en: ["Metal", "Wood", "Water", "Fire", "Earth"]
-        };
+        
+        // Corrected calculation for zodiac: year % 12
+        // Example: 1900 (Tý) -> 1900 % 12 = 4 (index of Tý)
+        // 1908 (Thân) -> 1908 % 12 = 0 (index of Thân)
+        const zodiacIndex = year % 12;
 
         const canChiTuongSinhTuongKhac = [
             // Can: Giáp, Ất, Bính, Đinh, Mậu, Kỷ, Canh, Tân, Nhâm, Quý
@@ -185,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const element = lunarYearData ? lunarYearData.element : 'N/A';
 
         return {
-            zodiac: zodiacAnimals[currentLang][(year - 4) % 12],
+            zodiac: zodiacAnimals[currentLang][zodiacIndex], // Đã sửa
             destiny: destiny,
             element: element
         };
@@ -382,41 +396,52 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function getHexagramMeaning(firstThreeDigits, lang) {
-        // More comprehensive (but still not exhaustive) mapping based on first 3 digits (mock data)
-        // These mappings are simplified and illustrative, not based on full I-Ching calculations
+        // Cập nhật mapping dựa trên dữ liệu mày cung cấp
         const mappings = {
-            '032': { vi: "Quẻ: Hỏa Địa Tấn (Tiến lên). Ý nghĩa: Có ý nghĩa tiến lên, phát triển mạnh mẽ, được quý nhân phù trợ. Rất tốt cho sự nghiệp và công danh.", en: "Hexagram: Fire on Earth (Progress). Meaning: Signifies strong progress and development, supported by benefactors. Very good for career and reputation." },
-            '033': { vi: "Quẻ: Thiên Lôi Vô Vọng (Không có gì sai). Ý nghĩa: Thuận theo tự nhiên, tránh cưỡng cầu. Mọi sự bình an nếu không làm điều trái lẽ.", en: "Hexagram: Heaven over Thunder (Without Error). Meaning: Follow natural course, avoid forcing things. Peace if actions are just." },
-            '034': { vi: "Quẻ: Phong Địa Quan (Quan sát). Ý nghĩa: Cần quan sát kỹ lưỡng, thận trọng trước khi hành động. Có cơ hội nhưng phải biết nắm bắt.", en: "Hexagram: Wind over Earth (Contemplation). Meaning: Observe carefully, be cautious before acting. Opportunities exist but must be seized wisely." },
-            '035': { vi: "Quẻ: Thủy Địa Tỷ (So sánh, gần gũi). Ý nghĩa: Tinh thần hợp tác, kết nối. Thuận lợi trong quan hệ đối tác, bạn bè.", en: "Hexagram: Water over Earth (Holding Together). Meaning: Cooperative spirit, connections. Favorable for partnerships and friendships." },
-            '036': { vi: "Quẻ: Sơn Địa Bác (Tan rã). Ý nghĩa: Giai đoạn suy thoái, cần thận trọng và bảo toàn. Tránh mạo hiểm.", en: "Hexagram: Mountain over Earth (Splitting Apart). Meaning: Period of decline, be cautious and preserve. Avoid risks." },
-            '037': { vi: "Quẻ: Địa Trạch Lâm (Lâm gần). Ý nghĩa: Tiến tới gần, có sự thịnh vượng đến. Cần chủ động và kiên trì.", en: "Hexagram: Earth over Lake (Approach). Meaning: Drawing near, prosperity is coming. Be proactive and persistent." },
-            '038': { vi: "Quẻ: Lôi Địa Dự (Dự bị, vui vẻ). Ý nghĩa: Hạnh phúc, thuận lợi. Cần chuẩn bị kỹ lưỡng để duy trì thành quả.", en: "Hexagram: Thunder over Earth (Enthusiasm). Meaning: Happiness, favorable. Prepare well to maintain achievements." },
-            '039': { vi: "Quẻ: Trạch Địa Tụy (Tụ họp). Ý nghĩa: Tập hợp, tụ họp. Tốt cho các hoạt động cộng đồng, kinh doanh tập thể.", en: "Hexagram: Lake over Earth (Gathering). Meaning: Assembly, coming together. Good for community activities, collective business." },
+            // Viettel
+            '032': { vi: "Đầu số mới, mang lại sự khởi đầu thuận lợi.", en: "New prefix, brings a favorable start." },
+            '033': { vi: "Biểu tượng cho sự vững chắc và thành công.", en: "Symbolizes firmness and success." },
+            '034': { vi: "Kết hợp giữa sự vững chắc (3) và bốn mùa hạnh phúc (4).", en: "Combines stability (3) and four seasons of happiness (4)." },
+            '035': { vi: "Sự sinh sôi và phát triển bền vững.", en: "Growth and sustainable development." },
+            '036': { vi: "Lộc phát, mang lại tài lộc và may mắn.", en: "Prosperity, brings wealth and luck." },
+            '037': { vi: "Thất tài, cần cân nhắc khi sử dụng.", en: "Unlucky wealth, needs consideration." },
+            '038': { vi: "Phát tài, tượng trưng cho sự thịnh vượng.", en: "Prosperous wealth, symbolizes prosperity." },
+            '039': { vi: "Trường cửu, biểu thị sự bền vững và lâu dài.", en: "Eternity, signifies stability and longevity." },
+            '086': { vi: "Phát lộc, mang lại tài lộc và may mắn.", en: "Prosperity, brings wealth and luck." },
+            '096': { vi: "Trường cửu, biểu thị sự bền vững và lâu dài.", en: "Eternity, signifies stability and longevity." },
+            '097': { vi: "Thất tài, cần cân nhắc khi sử dụng.", en: "Unlucky wealth, needs consideration." },
+            '098': { vi: "Phát tài, tượng trưng cho sự thịnh vượng.", en: "Prosperous wealth, symbolizes prosperity." },
 
-            '070': { vi: "Quẻ: Địa Thủy Sư (Quân đội). Ý nghĩa: Tổ chức, kỷ luật, có sức mạnh tập thể. Phù hợp cho người lãnh đạo, quản lý.", en: "Hexagram: Earth over Water (Army). Meaning: Organization, discipline, collective strength. Suitable for leaders and managers." },
-            '076': { vi: "Quẻ: Hỏa Thủy Vị Tế (Chưa xong). Ý nghĩa: Công việc chưa hoàn thành, cần tiếp tục cố gắng, kiên nhẫn. Cuối cùng sẽ thành công.", en: "Hexagram: Fire over Water (Not Yet Complete). Meaning: Task incomplete, requires continued effort and patience. Will eventually succeed." },
-            '077': { vi: "Quẻ: Lôi Hỏa Phong (Phong phú). Ý nghĩa: Thịnh vượng, đầy đủ. Gặp nhiều may mắn và cơ hội lớn.", en: "Hexagram: Thunder over Fire (Abundance). Meaning: Prosperity, completeness. Encounter many opportunities and great luck." },
-            '078': { vi: "Quẻ: Sơn Hỏa Bí (Trang trí). Ý nghĩa: Vẻ đẹp bên ngoài, sự tinh tế. Cần chú ý đến nội dung bên trong.", en: "Hexagram: Mountain over Fire (Grace). Meaning: External beauty, refinement. Inner substance also matters." },
-            '079': { vi: "Quẻ: Thủy Hỏa Ký Tế (Đã xong). Ý nghĩa: Mọi việc đã hoàn thành, đạt được mục tiêu. Cần giữ gìn thành quả.", en: "Hexagram: Water over Fire (Already Completed). Meaning: All tasks completed, goals achieved. Maintain accomplishments." },
+            // MobiFone
+            '070': { vi: "Khởi đầu thuận lợi, mang lại may mắn.", en: "Favorable start, brings good luck." },
+            '076': { vi: "Lộc phát, mang lại tài lộc và may mắn.", en: "Prosperity, brings wealth and luck." },
+            '077': { vi: "Thất tài, cần cân nhắc khi sử dụng.", en: "Unlucky wealth, needs consideration." },
+            '078': { vi: "Phát tài, tượng trưng cho sự thịnh vượng.", en: "Prosperous wealth, symbolizes prosperity." },
+            '079': { vi: "Thần tài lớn, mang lại tài lộc và may mắn.", en: "Major God of Wealth, brings wealth and luck." },
+            '089': { vi: "Phát cửu, phát triển vững chắc tới đỉnh vinh quang.", en: "Eternal growth, steady development to peak glory." },
+            '090': { vi: "Khởi đầu thuận lợi, mang lại may mắn.", en: "Favorable start, brings good luck." },
+            '093': { vi: "Tài lộc, thể hiện chủ sim là người có tài lại có lộc.", en: "Wealth and talent, signifies the owner has both talent and fortune." },
 
-            '086': { vi: "Quẻ: Phong Thiên Tiểu Súc (Tích trữ nhỏ). Ý nghĩa: Tích lũy dần dần, có sự khởi đầu nhỏ nhưng chắc chắn và sẽ phát triển lớn dần.", en: "Hexagram: Wind over Heaven (Minor Accumulation). Meaning: Gradual accumulation, small but steady beginning that will grow." },
-            '088': { vi: "Quẻ: Địa Thiên Thái (Thái bình). Ý nghĩa: Thái bình, an lạc, mọi sự hanh thông. Rất tốt cho cuộc sống và công việc.", en: "Hexagram: Earth over Heaven (Peace). Meaning: Peace, tranquility, smooth sailing. Very good for life and work." },
-            '089': { vi: "Quẻ: Thiên Phong Cấu (Gặp gỡ). Ý nghĩa: Gặp gỡ, kết nối, có duyên với người khác. Tốt cho quan hệ xã hội, hợp tác kinh doanh.", en: "Hexagram: Heaven over Wind (Encountering). Meaning: Encounters, connections, good karma with others. Good for social relationships and business cooperation." },
-            
-            '090': { vi: "Quẻ: Địa Lôi Phục (Trở lại). Ý nghĩa: Trở lại, phục hồi, sau khó khăn sẽ có khởi sắc mới. Tốt cho người muốn làm lại từ đầu.", en: "Hexagram: Earth over Thunder (Returning). Meaning: Returning, restoration, new beginnings after difficulties. Good for those wanting to start anew." },
-            '091': { vi: "Quẻ: Thủy Thiên Nhu (Chờ đợi). Ý nghĩa: Cần chờ đợi thời cơ, kiên nhẫn sẽ thành công. Không nên nóng vội.", en: "Hexagram: Water over Heaven (Waiting). Meaning: Need to wait for the right time, patience will lead to success. Avoid hastiness." },
-            '092': { vi: "Quẻ: Phong Lôi Ích (Tăng thêm). Ý nghĩa: Tăng thêm lợi ích, có sự gia tăng về tài lộc và may mắn. Rất tốt.", en: "Hexagram: Wind over Thunder (Increase). Meaning: Increased benefits, growth in wealth and luck. Very good." },
-            '093': { vi: "Quẻ: Trạch Thiên Quải (Quyết đoán). Ý nghĩa: Cần có sự quyết đoán, dứt khoát để vượt qua khó khăn. Tốt cho lãnh đạo.", en: "Hexagram: Lake over Heaven (Resolution). Meaning: Requires decisiveness and determination to overcome difficulties. Good for leaders." },
-            '094': { vi: "Quẻ: Thiên Thủy Tụng (Tranh chấp). Ý nghĩa: Có thể gặp tranh chấp, kiện tụng. Cần giải quyết ôn hòa, tránh xung đột.", en: "Hexagram: Heaven over Water (Conflict). Meaning: May encounter disputes, lawsuits. Resolve peacefully, avoid conflict." },
-            '096': { vi: "Quẻ: Thiên Phong Cấu (Gặp gỡ). Ý nghĩa: Gặp gỡ, kết nối. Có thể tốt cho quan hệ xã hội, hợp tác.", en: "Hexagram: Heaven over Wind (Encountering). Meaning: Encounters and connections. Good for social relationships and cooperation." },
-            '097': { vi: "Quẻ: Phong Hỏa Gia Nhân (Gia đình). Ý nghĩa: Hạnh phúc gia đình, sự hòa thuận. Tốt cho cuộc sống cá nhân và gia đạo.", en: "Hexagram: Wind over Fire (The Family). Meaning: Family happiness, harmony. Good for personal life and household." },
-            '098': { vi: "Quẻ: Địa Sơn Khiêm (Khiêm tốn). Ý nghĩa: Khiêm tốn, nhún nhường sẽ được lòng người và đạt thành công bền vững.", en: "Hexagram: Earth over Mountain (Modesty). Meaning: Modesty and humility will win hearts and achieve lasting success." },
-            '099': { vi: "Quẻ: Địa Trạch Lâm (Lâm gần). Ý nghĩa: Tiến tới gần, có sự thịnh vượng đến. Cần chủ động và kiên trì.", en: "Hexagram: Earth over Lake (Approach). Meaning: Drawing near, prosperity is coming. Be proactive and persistent." },
+            // VinaPhone
+            '081': { vi: "Khởi đầu thuận lợi, mang lại may mắn.", en: "Favorable start, brings good luck." },
+            '082': { vi: "Mãi mãi phát, biểu thị sự phát triển bền vững.", en: "Forever prosperous, signifies sustainable development." },
+            '083': { vi: "Phát tài, tượng trưng cho sự thịnh vượng.", en: "Prosperous wealth, symbolizes prosperity." },
+            '084': { vi: "Phát tài, tượng trưng cho sự thịnh vượng.", en: "Prosperous wealth, symbolizes prosperity." },
+            '085': { vi: "Sinh lộc, đại diện cho sự sinh sôi của tài lộc.", en: "Born prosperity, represents the flourishing of wealth." },
+            '088': { vi: "Song phát, mang lại tài lộc và may mắn.", en: "Double prosperity, brings wealth and luck." },
+            '091': { vi: "Khởi đầu thuận lợi, mang lại may mắn.", en: "Favorable start, brings good luck." },
+            '094': { vi: "Tài lộc, thể hiện chủ sim là người có tài lại có lộc.", en: "Wealth and talent, signifies the owner has both talent and fortune." },
 
-            // Add more common prefixes for other carriers if desired
+            // Vietnamobile
+            '056': { vi: "Lộc phát, mang lại tài lộc và may mắn.", en: "Prosperity, brings wealth and luck." },
+            '058': { vi: "Phát tài, tượng trưng cho sự thịnh vượng.", en: "Prosperous wealth, symbolizes prosperity." },
+            '092': { vi: "Mãi mãi phát, biểu thị sự phát triển bền vững.", en: "Forever prosperous, signifies sustainable development." },
+
+            // Gmobile
+            '059': { vi: "Sinh lộc, đại diện cho sự sinh sôi của tài lộc.", en: "Born prosperity, represents the flourishing of wealth." },
+            '099': { vi: "Song cửu, biểu thị sự bền vững và lâu dài.", en: "Double eternity, signifies stability and longevity." }
         };
-        return mappings[firstThreeDigits] ? mappings[firstThreeDigits][lang] : (lang === 'vi' ? "Ý nghĩa quẻ dịch chưa được cập nhật cho đầu số này." : "Hexagram meaning not updated for this prefix.");
+        return mappings[firstThreeDigits] ? mappings[firstThreeDigits][lang] : (lang === 'vi' ? "Ý nghĩa đầu số chưa được cập nhật cho đầu số này." : "Prefix meaning not updated for this prefix.");
     }
 
     function getSuffixMeaning(lastFourDigits, lang) {
@@ -717,50 +742,47 @@ document.addEventListener('DOMContentLoaded', () => {
         // Note: This is a simplified approach. Real carrier prefixes are more complex.
         switch (carrierValue) {
             case 'Viettel': prefixBase = ['32', '33', '34', '35', '36', '37', '38', '39', '86', '96', '97', '98'][Math.floor(Math.random() * 12)]; break; // Generates 03x or 086/09x
-            case 'Mobifone': prefixBase = ['70', '79', '77', '76', '78', '89', '90', '93'][Math.floor(Math.random() * 8)]; break; // Generates 07x or 089/09x
+            case 'Mobifone': prefixBase = ['70', '76', '77', '78', '79', '89', '90', '93'][Math.floor(Math.random() * 8)]; break; // Generates 07x or 089/09x
             case 'Vinaphone': prefixBase = ['81', '82', '83', '84', '85', '88', '91', '94'][Math.floor(Math.random() * 8)]; break; // Generates 08x or 09x
             case 'Vietnamobile': prefixBase = ['56', '58', '92'][Math.floor(Math.random() * 3)]; break; // Generates 05x or 092
             case 'Gmobile': prefixBase = ['59', '99'][Math.floor(Math.random() * 2)]; break; // Generates 059 or 099
-            default: prefixBase = ['3','7','8','9'][Math.floor(Math.random() * 4)] + Math.floor(Math.random() * 10).toString(); // Fallback to a random 0xx prefix
+            default: prefixBase = ['3','7','8','9','5'][Math.floor(Math.random() * 5)]; // Fallback to a common starting digit if carrier is unknown
         }
-
-        let num = '0' + prefixBase;
-        // Complete to 10 digits
-        while (num.length < 10) {
-            num += Math.floor(Math.random() * 10).toString();
+        
+        let number = '0' + prefixBase;
+        // Generate remaining 7 digits
+        for (let i = 0; i < 7; i++) {
+            number += Math.floor(Math.random() * 10).toString();
         }
-        return num;
+        return number;
     }
 
-    // Function to find the best feng shui number (now returns full analysis)
-    async function findBestFengShuiNumber(fullName, dobString, carrierValue) {
-        let bestAnalysisResult = null;
-        let highestScore = -Infinity;
-        const maxAttempts = 5000; // Increased attempts for better chances to find a good one
-        const goodEnoughScore = 60; // Define what "good enough" means
-
-        for (let i = 0; i < maxAttempts; i++) {
-            const testNumber = generateRandomPhoneNumber(carrierValue);
-            try {
-                const analysis = analyzeNumberMeaning(testNumber, fullName, dobString);
-                if (analysis.overallScore > highestScore) {
-                    highestScore = analysis.overallScore;
-                    bestAnalysisResult = analysis;
-                }
-                // If a "good" enough number is found, stop early
-                if (highestScore >= goodEnoughScore) { 
-                    break;
-                }
-            } catch (e) {
-                // console.warn(`Skipping invalid number ${testNumber} or analysis error: ${e.message}`);
-                // Don't warn too much for generated invalid numbers, just skip
-            }
-            // Add a small delay to prevent freezing the UI, but keep it fast enough
-            if (i % 200 === 0) { // Only yield control every 200 iterations
-                await new Promise(resolve => setTimeout(resolve, 5)); 
-            }
+    async function findBestFengShuiNumber(fullName, dobString, carrierValue, maxAttempts = 1000) {
+        const dob = new Date(dobString);
+        if (isNaN(dob.getTime())) {
+            throw new Error(currentLang === 'vi' ? "Ngày sinh không hợp lệ." : "Invalid date of birth.");
         }
 
-        return bestAnalysisResult;
+        let bestNumber = null;
+        let highestScore = -Infinity;
+
+        for (let i = 0; i < maxAttempts; i++) {
+            const potentialNumber = generateRandomPhoneNumber(carrierValue);
+            try {
+                const analysisResult = analyzeNumberMeaning(potentialNumber, fullName, dobString);
+                if (analysisResult.overallScore > highestScore) {
+                    highestScore = analysisResult.overallScore;
+                    bestNumber = analysisResult;
+                }
+                // Optional: Stop early if a very good score is found
+                if (highestScore >= 80) { // Define what "very good" means
+                    return bestNumber;
+                }
+            } catch (error) {
+                // console.warn(`Skipping invalid generated number ${potentialNumber}: ${error.message}`);
+                // Continue to next attempt if a generated number is invalid
+            }
+        }
+        return bestNumber; // Return the best one found after all attempts
     }
 });
